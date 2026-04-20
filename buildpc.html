@@ -1,32 +1,1099 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Build PC</title>
+    <title>Xây Dựng PC - Store Premium</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body.buildpc {
+        font-family: 'Barlow', 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+        color: #1f2937;
+        line-height: 1.6;
+    }
+
+    /* ============ TOP NAV ============ */
+    .nav-1920 {
+        background: linear-gradient(180.3deg, #259AFF -18.56%, #114CDD 100.92%);
+    }
+
+    /* ============ HEADER NAV ============ */
+    .header-nav {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ============ HERO SECTION ============ */
+    .hero-section {
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 50%, #0d3bb5 100%);
+        color: white;
+        padding: 60px 40px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-section::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -10%;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-title {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 15px;
+        letter-spacing: -1px;
+        background: linear-gradient(135deg, #ffffff 0%, #e8f4ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+        opacity: 0.95;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+    }
+
+    .hero-icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(30px); }
+    }
+
+    /* ============ PRESET BUTTONS ============ */
+    .presets-section {
+        padding: 40px 20px;
+        margin: 20px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .presets-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #1f2937;
+    }
+
+    .presets-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    .preset-card {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+        border: 2px solid transparent;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .preset-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .preset-card:hover::before {
+        left: 100%;
+    }
+
+    .preset-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(37, 154, 255, 0.15);
+        border-color: #259AFF;
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 100%);
+        color: white;
+    }
+
+    .preset-card.active {
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 100%);
+        color: white;
+        box-shadow: 0 20px 40px rgba(37, 154, 255, 0.25);
+    }
+
+    .preset-icon {
+        font-size: 32px;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .preset-name {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .preset-price {
+        font-size: 11px;
+        opacity: 0.7;
+    }
+
+    /* ============ MAIN LAYOUT ============ */
+    .main-container {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 25px;
+        padding: 30px 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    /* ============ PARTS SECTION ============ */
+    .parts-section {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .section-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .parts-counter {
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 100%);
+        color: white;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* ============ PART CARD ============ */
+    .part-card {
+        display: grid;
+        grid-template-columns: 50px 1fr 140px auto;
+        gap: 16px;
+        align-items: center;
+        background: linear-gradient(135deg, #f9fafb 0%, #f5f7fa 100%);
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 15px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .part-card:hover {
+        background: linear-gradient(135deg, #e8f4ff 0%, #f0f6ff 100%);
+        border-color: #259AFF;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(37, 154, 255, 0.12);
+    }
+
+    .part-card.selected {
+        background: linear-gradient(135deg, #e8f4ff 0%, #f0f6ff 100%);
+        border-color: #259AFF;
+        box-shadow: 0 12px 30px rgba(37, 154, 255, 0.15);
+    }
+
+    .part-icon {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    .part-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .part-label {
+        font-weight: 700;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #114CDD;
+    }
+
+    .part-name {
+        font-weight: 600;
+        font-size: 15px;
+        color: #1f2937;
+    }
+
+    .part-spec {
+        font-size: 12px;
+        color: #6b7280;
+    }
+
+    .part-status {
+        font-size: 12px;
+        color: #9ca3af;
+        font-style: italic;
+    }
+
+    .part-price {
+        font-weight: 700;
+        font-size: 16px;
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-align: right;
+    }
+
+    .part-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    /* ============ BUTTONS ============ */
+    .btn-primary {
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 100%);
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(37, 154, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(37, 154, 255, 0.3);
+    }
+
+    .btn-danger {
+        background: #fee;
+        color: #dc2626;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-danger:hover {
+        background: #fdd;
+        transform: scale(1.05);
+    }
+
+    /* ============ SIDEBAR ============ */
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* ============ CARD ============ */
+    .card {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+        border: 1px solid #f0f0f0;
+    }
+
+    .card-header {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-badge {
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 100%);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    /* ============ SUMMARY ============ */
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 13px;
+    }
+
+    .summary-row:last-child {
+        border-bottom: none;
+    }
+
+    .summary-row-label {
+        color: #6b7280;
+        font-weight: 500;
+    }
+
+    .summary-row-value {
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .summary-total {
+        padding-top: 16px;
+        margin-top: 16px;
+        border-top: 2px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .summary-total-label {
+        font-weight: 600;
+        color: #6b7280;
+    }
+
+    .summary-total-price {
+        font-size: 32px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #259AFF 0%, #114CDD 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .btn-order {
+        width: 100%;
+        background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
+        color: white;
+        border: none;
+        padding: 16px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(255, 106, 0, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-order:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(255, 106, 0, 0.35);
+    }
+
+    .btn-order:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* ============ MODAL ============ */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .modal-overlay.active {
+        display: flex;
+    }
+
+    .modal {
+        background: white;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 650px;
+        max-height: 85vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.3s ease;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .modal-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .modal-close {
+        background: #f3f4f6;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+    }
+
+    .modal-close:hover {
+        background: #e5e7eb;
+        transform: rotate(90deg);
+    }
+
+    .modal-search {
+        padding: 16px 24px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .modal-search input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .modal-search input:focus {
+        outline: none;
+        border-color: #259AFF;
+        box-shadow: 0 0 0 3px rgba(37, 154, 255, 0.1);
+    }
+
+    .modal-products {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+    }
+
+    .product-card {
+        display: flex;
+        gap: 14px;
+        padding: 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        margin-bottom: 10px;
+    }
+
+    .product-card:hover {
+        background: #f9fafb;
+        transform: translateX(4px);
+    }
+
+    .product-card.selected {
+        background: linear-gradient(135deg, #e8f4ff 0%, #f0f6ff 100%);
+        border-color: #259AFF;
+    }
+
+    .product-icon {
+        font-size: 32px;
+    }
+
+    .product-info {
+        flex: 1;
+    }
+
+    .product-name {
+        font-weight: 600;
+        font-size: 14px;
+        color: #1f2937;
+        margin-bottom: 3px;
+    }
+
+    .product-spec {
+        font-size: 12px;
+        color: #6b7280;
+    }
+
+    .product-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 10px;
+        font-weight: 600;
+        margin-top: 6px;
+    }
+
+    .product-price {
+        font-weight: 700;
+        color: #114CDD;
+        font-size: 15px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ============ FOOTER ============ */
+    .footer {
+        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .footer-text {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 1024px) {
+        .main-container {
+            grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+            position: sticky;
+            bottom: 0;
+        }
+
+        .hero-title {
+            font-size: 36px;
+        }
+
+        .part-card {
+            grid-template-columns: 40px 1fr;
+        }
+
+        .part-price {
+            grid-column: 1 / -1;
+            justify-self: flex-start;
+            margin-top: 8px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .hero-title {
+            font-size: 28px;
+        }
+
+        .presets-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .parts-section {
+            padding: 20px;
+        }
+
+        .part-card {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .main-container {
+            padding: 15px;
+            gap: 15px;
+        }
+    }
+    </style>
 </head>
-<body>
-    <header>
-        <nav>
+<body class="buildpc">
+
+    <!-- TOP NAV -->
+    <div class="nav-1920">
+        <div class="nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="buildpc.html">Build PC</a></li>
-                <li><a href="cart.html">Cart</a></li>
+                <li><a href="#"><i class="fa-regular fa-building"></i> Hệ thống showroom</a></li>
+                <li><a href="#"><i class="fa-solid fa-briefcase"></i> Dành cho doanh nghiệp</a></li>
+                <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> Apple education</a></li>
+                <li><a href="#"><i class="fa-solid fa-phone"></i> Hotline</a></li>
+                <li><a href="#"><i class="fa-solid fa-rss"></i> Tin công nghệ</a></li>
+                <li><a href="#"><i class="fa-solid fa-desktop"></i> Xây dựng cấu hình</a></li>
+                <li><a href="#"><i class="fa-solid fa-gift"></i> Khuyến mãi</a></li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </div>
 
-    <main>
-        <h1>Build Your PC</h1>
-        <p>Welcome to the Build PC page! Here you can select components to build your desired computer.</p>
-        <!-- Add more content related to building a PC here -->
-    </main>
+    <!-- HEADER NAV -->
+    <div class="header-nav">
+        <div class="row align-center">
+            <div class="col-3">
+                <div class="logo-wrapper">
+                    <a href="nav.html" style="margin-top: 0;">
+                        <img src="img/42ca7e8e-82f9-48d1-9e65-c44c9b1fe3fb.jpg" alt="FullStack Computer" class="logo-main">
+                    </a>
+                    <div class="menu-container">
+                        <button class="btn-category"><i class="fa-solid fa-bars"></i> Danh mục sản phẩm</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="search-container">
+                    <input type="text" placeholder="Bạn muốn mua gì hôm nay...">
+                    <div class="search-keywords">
+                        <a href="#">iPhone 17</a>
+                        <a href="#">MacBook Air M4</a>
+                        <a href="#">Laptop</a>
+                        <a href="#">Laptop RTX 50 series</a>
+                        <a href="#">Màn Hình</a>
+                        <a href="#">VGA</a>
+                        <a href="#">Build PC</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 flex-end">
+                <div class="user-info-header">
+                    <img class="avt-header" src="https://scontent.fsgn5-10.fna.fbcdn.net/v/t39.30808-1/513826810_1412559273230131_6427666480297972674_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeHGN7ybpgLnQyg-KPinyHu7qUxuDsymr06pTG4OzKavTmNbt3JbOe6IwJ3LvHdRTlQGQQIVwnKa5AKw2ajPUiOG&_nc_ohc=sgXqvYjlzQYQ7kNvwFGlxEy&_nc_oc=AdmLIS6O355erxwZ9brCPqbO8drzh6FIreG1UcnBJGb_i_0XS_mixgCnZLfbPyDWDGU&_nc_zt=24&_nc_ht=scontent.fsgn5-10.fna&_nc_gid=p8YYj-xdohxl06HocD_B6Q&_nc_ss=8&oh=00_Afzm1NtQpnyk2YLm87eYMommV_N7ZR_NPWA-YLiRuLE-xQ&oe=69B8B936" alt="">
+                    <div class="user-text">
+                        <p class="small-text">Xin chào, </p>
+                        <span class="small-text">Luân Nguyễn</span>
+                    </div>
 
-    <footer>
-        <p>&copy; 2026 PC Builder Inc.</p>
-    </footer>
+                    <a href="#" class="cart-wrapper">
+                        <div class="cart-icon-container">
+                            <i class="fa-solid fa-bell icon-header"></i>
+                            <span class="cart-badge">0</span>
+                        </div>
+                    </a>
 
-    <script src="cart.js"></script>
+                    <div class="cart-wrapper" id="cartDropdown">
+                        <div class="cart-icon-container">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="cart-badge" id="cart-badge-count">0</span>
+                        </div>
+
+                        <div class="cart-dropdown-content" id="cartDropdownContent">
+                            <div class="cart-dropdown-header">
+                                <span class="cart-dropdown-title">Giỏ hàng của bạn</span>
+                                <span class="cart-dropdown-count" id="dropdown-item-count">0 sản phẩm</span>
+                            </div>
+
+                            <div class="cart-list-items" id="cart-list-items">
+                            </div>
+
+                            <div class="cart-dropdown-footer">
+                                <div class="cart-dropdown-total-row">
+                                    <span>Tổng cộng:</span>
+                                    <span class="cart-dropdown-total-price" id="cart-dropdown-total">0đ</span>
+                                </div>
+                                <a href="cart.html" class="view-cart-btn">
+                                    <i class="fa-solid fa-bag-shopping"></i> Xem tất cả giỏ hàng
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="hero-icon">⚙️</div>
+            <h1 class="hero-title">Xây Dựng PC Dream Của Bạn</h1>
+            <p class="hero-subtitle">Chọn linh kiện · Kiểm tra tương thích · Mua hàng dễ dàng</p>
+        </div>
+    </div>
+
+    <!-- PRESETS SECTION -->
+    <div class="presets-section">
+        <div class="presets-title">🚀 Chọn cấu hình theo nhu cầu</div>
+        <div class="presets-grid">
+            <div class="preset-card" onclick="applyPreset('gaming', this)">
+                <div class="preset-icon">🎮</div>
+                <div class="preset-name">Gaming</div>
+                <div class="preset-price">~45 triệu</div>
+            </div>
+            <div class="preset-card" onclick="applyPreset('esport', this)">
+                <div class="preset-icon">⚡</div>
+                <div class="preset-name">Esport</div>
+                <div class="preset-price">~22 triệu</div>
+            </div>
+            <div class="preset-card" onclick="applyPreset('creative', this)">
+                <div class="preset-icon">🎨</div>
+                <div class="preset-name">Render</div>
+                <div class="preset-price">~38 triệu</div>
+            </div>
+            <div class="preset-card" onclick="applyPreset('office', this)">
+                <div class="preset-icon">💼</div>
+                <div class="preset-name">Văn phòng</div>
+                <div class="preset-price">~12 triệu</div>
+            </div>
+            <div class="preset-card" onclick="applyPreset('budget', this)">
+                <div class="preset-icon">💰</div>
+                <div class="preset-name">Phổ thông</div>
+                <div class="preset-price">~7 triệu</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-container">
+        <!-- LEFT SIDE - PARTS -->
+        <div class="parts-section">
+            <div class="section-header">
+                <span class="section-title">📦 Linh kiện</span>
+                <div class="parts-counter"><span id="parts-count">0</span>/10</div>
+            </div>
+            <div id="parts-list"></div>
+        </div>
+
+        <!-- RIGHT SIDE - SUMMARY -->
+        <div class="sidebar">
+            <!-- ORDER SUMMARY -->
+            <div class="card">
+                <div class="card-header">
+                    💰 Tóm tắt đơn hàng
+                </div>
+                <div id="summary-rows"></div>
+                <div class="summary-total">
+                    <span class="summary-total-label">Tổng cộng:</span>
+                    <span class="summary-total-price" id="total-price">0đ</span>
+                </div>
+                <button class="btn-order" id="btn-order" disabled onclick="orderNow()">
+                    🛒 Đặt hàng ngay
+                </button>
+            </div>
+
+            <!-- INFO CARD -->
+            <div class="card">
+                <div class="card-header">
+                    ✅ Tương thích
+                </div>
+                <div id="compat-info" style="font-size: 13px; color: #6b7280; line-height: 1.8;">
+                    <p>Chọn ít nhất 5 linh kiện để kiểm tra tương thích</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalIfOverlay(event)">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Chọn linh kiện</h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-search">
+                <input type="text" placeholder="🔍 Tìm kiếm..." id="searchInput" oninput="filterProducts()">
+            </div>
+            <div class="modal-products" id="modal-products"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <p class="footer-text">© 2026 FullStack Computer - Xây Dựng PC Thành Công 🎉</p>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+    const PARTS = [
+        {id: 'cpu', name: 'CPU', icon: '🔲'},
+        {id: 'mb', name: 'Mainboard', icon: '📋'},
+        {id: 'ram', name: 'RAM', icon: '📊'},
+        {id: 'gpu', name: 'Card đồ họa', icon: '🖥️'},
+        {id: 'ssd', name: 'SSD', icon: '💾'},
+        {id: 'hdd', name: 'HDD', icon: '🗜️'},
+        {id: 'psu', name: 'Nguồn', icon: '⚡'},
+        {id: 'case', name: 'Case', icon: '🖳'},
+        {id: 'cool', name: 'Tản nhiệt', icon: '🌀'},
+        {id: 'mon', name: 'Màn hình', icon: '🖥'},
+    ];
+
+    const CATALOG = {
+        cpu: [
+            {name: 'Intel Core i9-14900K', spec: '24 nhân · 6.0GHz · LGA1700', price: 14500000, badge: '🔥 Hot'},
+            {name: 'Intel Core i7-14700K', spec: '20 nhân · 5.6GHz · LGA1700', price: 9200000},
+            {name: 'Intel Core i5-14400F', spec: '10 nhân · 4.7GHz · LGA1700', price: 4800000, badge: '💸 Sale'},
+            {name: 'AMD Ryzen 9 7950X3D', spec: '16 nhân · 5.7GHz · AM5', price: 21000000, badge: '✨ Mới'},
+        ],
+        mb: [
+            {name: 'ASUS ROG STRIX Z790-E', spec: 'LGA1700 · DDR5 · PCIe 5.0', price: 9800000, badge: '🔥 Hot'},
+            {name: 'MSI MAG Z790 Tomahawk', spec: 'LGA1700 · DDR5', price: 5900000},
+            {name: 'Gigabyte B760M DS3H', spec: 'LGA1700 · DDR4', price: 2600000},
+        ],
+        ram: [
+            {name: 'G.Skill Trident Z5 32GB', spec: 'DDR5-6000 · CAS 30', price: 4200000, badge: '🔥 Hot'},
+            {name: 'Corsair Dominator 32GB', spec: 'DDR5-5600 · CAS 36', price: 3800000},
+            {name: 'Kingston Fury 16GB', spec: 'DDR4-3200 · CAS 16', price: 1350000},
+        ],
+        gpu: [
+            {name: 'RTX 4090 24GB', spec: 'Ada Lovelace · 450W', price: 42000000, badge: '🔥 Hot'},
+            {name: 'RTX 4080 Super 16GB', spec: 'Ada Lovelace · 320W', price: 25000000},
+            {name: 'RTX 4070 Ti Super', spec: 'Ada Lovelace · 285W', price: 19500000, badge: '✨ Mới'},
+        ],
+        ssd: [
+            {name: 'Samsung 990 Pro 2TB', spec: 'PCIe 4.0 · 7450MB/s', price: 3200000, badge: '🔥 Hot'},
+            {name: 'WD Black SN850X 1TB', spec: 'PCIe 4.0 · 7300MB/s', price: 2200000},
+            {name: 'Seagate FireCuda 530', spec: 'PCIe 4.0 · 7300MB/s', price: 3500000},
+        ],
+        hdd: [
+            {name: 'Seagate Barracuda 4TB', spec: '5400RPM · 256MB cache', price: 2400000},
+            {name: 'WD Blue 2TB', spec: '7200RPM · 256MB cache', price: 1450000, badge: '💸 Sale'},
+        ],
+        psu: [
+            {name: 'Corsair RM1000x 1000W', spec: '80+ Gold · Full Modular', price: 5200000, badge: '✨ Mới'},
+            {name: 'Seasonic Focus GX 850W', spec: '80+ Gold', price: 3600000, badge: '🔥 Hot'},
+            {name: 'be quiet! 850W', spec: '80+ Titanium', price: 5800000},
+        ],
+        case: [
+            {name: 'Lian Li PC-O11 Dynamic', spec: 'Full Tower · ATX', price: 4200000, badge: '🔥 Hot'},
+            {name: 'Fractal Design Torrent', spec: 'ATX · Mesh', price: 3800000, badge: '✨ Mới'},
+            {name: 'NZXT H7 Flow 2023', spec: 'ATX · Airflow', price: 2800000},
+        ],
+        cool: [
+            {name: 'Noctua NH-D15', spec: 'Air · 2×140mm · TDP 250W', price: 2100000, badge: '🔥 Hot'},
+            {name: 'Corsair H150i Elite', spec: 'AIO · 360mm · TDP 400W', price: 5800000, badge: '✨ Mới'},
+        ],
+        mon: [
+            {name: 'LG UltraGear 27"', spec: '2560×1440 · 165Hz', price: 7200000, badge: '🔥 Hot'},
+            {name: 'ASUS TUF Gaming 27"', spec: '1920×1080 · 280Hz', price: 6800000, badge: '✨ Mới'},
+        ],
+    };
+
+    const PRESETS = {
+        gaming: {cpu: 0, mb: 0, ram: 0, gpu: 0, ssd: 0, psu: 1, case: 0, cool: 0},
+        esport: {cpu: 1, mb: 1, ram: 1, gpu: 2, ssd: 0, psu: 1, case: 1, cool: 0},
+        creative: {cpu: 0, mb: 0, ram: 0, gpu: 1, ssd: 0, psu: 1, case: 1, cool: 0},
+        office: {cpu: 1, mb: 1, ram: 2, ssd: 0, psu: 1, case: 1, cool: 0},
+        budget: {cpu: 1, mb: 2, ram: 2, ssd: 0, psu: 1, case: 1, cool: 0},
+    };
+
+    let selected = {};
+    let currentPart = null;
+    let allProducts = [];
+
+    function fmt(n) {
+        return n.toLocaleString('vi-VN') + 'đ';
+    }
+
+    function render() {
+        const list = document.getElementById('parts-list');
+        list.innerHTML = '';
+        let count = Object.keys(selected).length;
+
+        PARTS.forEach(part => {
+            const item = selected[part.id];
+            const card = document.createElement('div');
+            card.className = 'part-card' + (item ? ' selected' : '');
+            card.innerHTML = `
+                <div class="part-icon">${part.icon}</div>
+                <div class="part-info">
+                    <div class="part-label">${part.name}</div>
+                    ${item ? `
+                        <div class="part-name">${item.name}</div>
+                        <div class="part-spec">${item.spec}</div>
+                    ` : `
+                        <div class="part-status">Chưa chọn</div>
+                    `}
+                </div>
+                ${item ? `<div class="part-price">${fmt(item.price)}</div>` : ''}
+                <div class="part-actions">
+                    <button class="btn-primary" onclick="openModal('${part.id}')">
+                        ${item ? 'Đổi' : 'Chọn'}
+                    </button>
+                    ${item ? `<button class="btn-danger" onclick="removePart('${part.id}')">🗑️</button>` : ''}
+                </div>
+            `;
+            list.appendChild(card);
+        });
+
+        document.getElementById('parts-count').textContent = count;
+        updateSidebar();
+    }
+
+    function openModal(partId) {
+        currentPart = partId;
+        const part = PARTS.find(p => p.id === partId);
+        document.getElementById('modalTitle').textContent = `Chọn ${part.name}`;
+        document.getElementById('searchInput').value = '';
+        allProducts = CATALOG[partId] || [];
+        renderProducts(allProducts);
+        document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function renderProducts(products) {
+        const container = document.getElementById('modal-products');
+        if (!products.length) {
+            container.innerHTML = '<div style="text-align:center; padding:40px 20px; color:#999;">Không có sản phẩm</div>';
+            return;
+        }
+
+        container.innerHTML = '';
+        products.forEach(prod => {
+            const isSelected = selected[currentPart]?.name === prod.name;
+            const card = document.createElement('div');
+            card.className = 'product-card' + (isSelected ? ' selected' : '');
+            card.innerHTML = `
+                <div class="product-icon">${PARTS.find(p => p.id === currentPart).icon}</div>
+                <div class="product-info">
+                    <div class="product-name">${prod.name}</div>
+                    <div class="product-spec">${prod.spec}</div>
+                    ${prod.badge ? `<div class="product-badge">${prod.badge}</div>` : ''}
+                </div>
+                <div class="product-price">${fmt(prod.price)}</div>
+            `;
+            card.onclick = () => selectPart(currentPart, prod);
+            container.appendChild(card);
+        });
+    }
+
+    function filterProducts() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        const filtered = allProducts.filter(p => 
+            p.name.toLowerCase().includes(q) || p.spec.toLowerCase().includes(q)
+        );
+        renderProducts(filtered);
+    }
+
+    function closeModal() {
+        document.getElementById('modalOverlay').classList.remove('active');
+    }
+
+    function closeModalIfOverlay(e) {
+        if (e.target.id === 'modalOverlay') closeModal();
+    }
+
+    function selectPart(partId, prod) {
+        selected[partId] = prod;
+        closeModal();
+        render();
+    }
+
+    function removePart(partId) {
+        delete selected[partId];
+        render();
+    }
+
+    function applyPreset(name, element) {
+        document.querySelectorAll('.preset-card').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+        selected = {};
+        const preset = PRESETS[name];
+        Object.entries(preset).forEach(([id, idx]) => {
+            if (CATALOG[id]?.[idx]) selected[id] = CATALOG[id][idx];
+        });
+        render();
+    }
+
+    function updateSidebar() {
+        const rows = document.getElementById('summary-rows');
+        let total = 0;
+        rows.innerHTML = '';
+
+        Object.entries(selected).forEach(([id, prod]) => {
+            total += prod.price;
+            const row = document.createElement('div');
+            row.className = 'summary-row';
+            row.innerHTML = `
+                <span class="summary-row-label">${PARTS.find(p => p.id === id).name}</span>
+                <span class="summary-row-value">${fmt(prod.price)}</span>
+            `;
+            rows.appendChild(row);
+        });
+
+        document.getElementById('total-price').textContent = fmt(total);
+        document.getElementById('btn-order').disabled = Object.keys(selected).length < 5;
+    }
+
+    function orderNow() {
+        if (Object.keys(selected).length < 5) {
+            alert('⚠️ Vui lòng chọn ít nhất 5 linh kiện!');
+            return;
+        }
+        alert('✅ Đặt hàng thành công!\n\n🎉 Nhân viên sẽ liên hệ xác nhận trong 30 phút.');
+    }
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    render();
+    </script>
 </body>
 </html>
